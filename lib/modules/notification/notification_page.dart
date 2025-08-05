@@ -176,7 +176,7 @@ class _NotificationPageState extends TbPageState<NotificationPage> {
                               tbContext: tbContext,
                               onClearNotification: (id) {
                                 final notification = _notifications.firstWhere(
-                                  (e) => e.message.messageId == id,
+                                  (e) => e.message['messageId'] == id,
                                 );
 
                                 if (!notification.read) {
@@ -188,7 +188,7 @@ class _NotificationPageState extends TbPageState<NotificationPage> {
 
                                 setState(() {
                                   _notifications.removeWhere(
-                                    (e) => e.message.messageId == id,
+                                    (e) => e.message['messageId'] == id,
                                   );
                                 });
 
@@ -204,7 +204,7 @@ class _NotificationPageState extends TbPageState<NotificationPage> {
                               },
                               onReadNotification: (id) {
                                 final index = _notifications.indexWhere(
-                                  (e) => e.message.messageId == id,
+                                  (e) => e.message['messageId'] == id,
                                 );
                                 if (index == -1) {
                                   return;
@@ -221,8 +221,7 @@ class _NotificationPageState extends TbPageState<NotificationPage> {
                                 });
 
                                 final type = _notifications[index]
-                                    .message
-                                    .data['notificationType'];
+                                    .message['notificationType'];
 
                                 if (type?.toUpperCase().contains('ALARM') ==
                                     true) {
@@ -301,12 +300,12 @@ class _NotificationPageState extends TbPageState<NotificationPage> {
   }
 
   void _updateAlarmStatusById(NotificationModel notification) {
-    final id = notification.message.data['info.alarmId'];
-    final status = notification.message.data['info.alarmStatus'];
+    final id = notification.message['info.alarmId'];
+    final status = notification.message['info.alarmStatus'];
 
     for (int i = 0; i < _notifications.length; ++i) {
-      if (_notifications[i].message.data['info.alarmId'] == id) {
-        _notifications[i].message.data['info.alarmStatus'] = status;
+      if (_notifications[i].message['info.alarmId'] == id) {
+        _notifications[i].message['info.alarmStatus'] = status;
       }
     }
   }

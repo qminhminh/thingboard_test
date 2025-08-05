@@ -1,7 +1,7 @@
 import 'dart:async';
 
 import 'package:device_info_plus/device_info_plus.dart';
-import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_core/firebase_core.dart';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -18,7 +18,7 @@ import 'package:thingsboard_app/utils/services/tb_app_storage.dart';
 import 'package:thingsboard_app/utils/services/widget_action_handler.dart';
 import 'package:thingsboard_app/utils/services/wl_service.dart';
 import 'package:thingsboard_pe_client/thingsboard_client.dart';
-import 'package:uni_links/uni_links.dart';
+// import 'package:uni_links/uni_links.dart';  // discontinued
 import 'package:universal_platform/universal_platform.dart';
 
 enum NotificationType { info, warn, success, error }
@@ -189,19 +189,21 @@ class TbContext implements PopEntry {
         packageName = 'web.app';
       }
       try {
-        final initialUri = await getInitialUri();
-        _updateInitialNavigation(initialUri);
+        // Deep linking functionality removed due to discontinued uni_links package
+        // final initialUri = await getInitialUri();
+        // _updateInitialNavigation(initialUri);
       } catch (e) {
         log.error('Failed to get initial uri: $e', e);
       }
       await tbClient.init();
       if (UniversalPlatform.isAndroid || UniversalPlatform.isIOS) {
-        uriLinkStream.listen((Uri? uri) {
-          _updateInitialNavigation(uri);
-          handleInitialNavigation();
-        }, onError: (e) {
-          log.error('Failed to get new initial uri: $e', e);
-        });
+        // Deep linking functionality removed due to discontinued uni_links package
+        // uriLinkStream.listen((Uri? uri) {
+        //   _updateInitialNavigation(uri);
+        //   handleInitialNavigation();
+        // }, onError: (e) {
+        //   log.error('Failed to get new initial uri: $e', e);
+        // });
       }
     } catch (e, s) {
       log.error('Failed to init tbContext: $e', e, s);
@@ -351,9 +353,9 @@ class TbContext implements PopEntry {
       await wlService.updateWhiteLabeling();
       await updateRouteState();
       if (tbClient.getAuthUser()!.userId != null) {
-        if (Firebase.apps.isNotEmpty) {
-          NotificationService().init(tbClient, log, this);
-        }
+        // if (Firebase.apps.isNotEmpty) {
+        //   NotificationService().init(tbClient, log, this);
+        // }
       }
     } catch (e, s) {
       log.error('Error: $e', e, s);
@@ -377,9 +379,9 @@ class TbContext implements PopEntry {
   }
 
   Future<void> logout({RequestConfig? requestConfig}) async {
-    if (Firebase.apps.isNotEmpty) {
-      await NotificationService().logout();
-    }
+    // if (Firebase.apps.isNotEmpty) {
+    //   await NotificationService().logout();
+    // }
     tbClient.logout(requestConfig: requestConfig);
   }
 

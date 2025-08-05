@@ -17,7 +17,7 @@ class TbSecureStorage implements TbStorage {
   }
 
   @override
-  Future<void> setItem(String key, String value) async {
-    return await flutterStorage.write(key: key, value: value);
+  Future<void> setItem(String key, dynamic value) async {
+    return await flutterStorage.write(key: key, value: value.toString());
   }
 }

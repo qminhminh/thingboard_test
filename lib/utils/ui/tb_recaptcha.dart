@@ -74,7 +74,7 @@ class _TbRecaptchaState extends TbPageState<TbRecaptcha> {
       children: [
         InAppWebView(
             key: recaptchaWebViewKey,
-            initialUrlRequest: URLRequest(url: _initialUrl),
+            initialUrlRequest: URLRequest(url: WebUri.uri(_initialUrl)),
             initialOptions: options,
             onWebViewCreated: (webViewController) {
               webViewController.addJavaScriptHandler(
@@ -122,6 +122,6 @@ class _TbRecaptchaState extends TbPageState<TbRecaptcha> {
     var controller = await _webViewController.future;
     await controller.postWebMessage(
         message: WebMessage(data: jsonEncode(windowMessage)),
-        targetOrigin: Uri.parse('*'));
+        targetOrigin: WebUri.uri(Uri.parse('*')));
   }
 }

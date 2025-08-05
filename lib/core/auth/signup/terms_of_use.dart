@@ -47,9 +47,8 @@ class _TermsOfUseState extends TbPageState<TermsOfUse> {
                         var termsOfUse = jsonDecode(snapshot.data ?? '');
                         dom.Document document =
                             htmlparser.parse(termsOfUse ?? '');
-                        return Html.fromDom(
-                          document: document,
-                          tagsList: [],
+                        return Html(
+                          data: document.outerHtml,
                         );
                       } else {
                         return Center(

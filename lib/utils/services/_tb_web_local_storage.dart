@@ -17,7 +17,7 @@ class TbWebLocalStorage implements TbStorage {
   }
 
   @override
-  Future<void> setItem(String key, String value) async {
-    _localStorage[key] = value;
+  Future<void> setItem(String key, dynamic value) async {
+    _localStorage[key] = value.toString();
   }
 }
