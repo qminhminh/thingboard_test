@@ -26,6 +26,7 @@ void main() async {
 //  await Permission.storage.request();
 
   if (UniversalPlatform.isAndroid) {
+    // ignore: deprecated_member_use
     await AndroidInAppWebViewController.setWebContentsDebuggingEnabled(true);
   }
 
